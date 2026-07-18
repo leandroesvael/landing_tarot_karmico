@@ -142,34 +142,6 @@ background: linear-gradient(90deg, transparent, #f5d68a, transparent); /*luz ─
 margin-top: 30px;
 }
 
-.hero-visual {
-display: flex;
-justify-content: center;
-}
-
-.hero-image-card {
-width: 280px;
-height: 380px;
-
-border-radius: 28px;
-overflow: hidden;
-
-border: none;
-/*border: 1px solid rgba(255,255,255,0.14);
-
-box-shadow:
-  0 20px 50px rgba(0,0,0,0.35),
-  inset 0 1px 0 rgba(255,255,255,0.08);*/
-transform: rotate(3deg);
-}
-
-.hero-image-card img {
-width: 90%;
-height: 90%;
-object-fit: cover;
-display: block;
-}
-
 .hero h1 {
   font-size: 52px;
   font-weight: 700;
@@ -245,27 +217,22 @@ form button:hover,
 }
 
 .card-shuffle.carreira .shuffle-card {
+  
+  background-image: url("imagens/verso_carreira.png");
+/*
   background: linear-gradient(
     180deg,
     #4a3b17,
     #c29b34
-  );
+  );*/
 }
 
 .card-shuffle.espiritualidade .shuffle-card {
-  background: linear-gradient(
-    180deg,
-    #2f1f50,
-    #7e59c8
-  );
+  background-image: url("imagens/verso_espiritual.png");
 }
 
 .card-shuffle.decisoes .shuffle-card {
-  background: linear-gradient(
-    180deg,
-    #17374c,
-    #3d7fa6
-  );
+   background-image: url("imagens/verso_decisoes.png");
 }
 
 /* SOBRE A CONSULTA */
@@ -339,51 +306,6 @@ background: rgba(245,214,138,0.22);
   color: #f5d68a;
 
   transition: 0.3s;
-}
-
-/* DEPOIMENTOS */
-
-.testimonials-section {
-  padding: 60px 20px 35px;
-  text-align: center;
-}
-
-.testimonials-grid {
-  max-width: 1100px;
-
-  margin: 0 auto;
-
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 24px;
-}
-
-.testimonial-card {
-  background: rgba(255,255,255,0.06);
-
-  border: 1px solid rgba(255,255,255,0.10);
-
-  border-radius: 16px;
-
-  padding: 30px;
-
-  backdrop-filter: blur(10px);
-}
-
-.testimonial-card p {
-  line-height: 1.8;
-
-  color: #e4deef;
-
-  margin-bottom: 20px;
-}
-
-.testimonial-card span {
-  color: #f5d68a;
-
-  font-size: 18px;
 }
 
 .phone-frame {
@@ -567,8 +489,7 @@ html {
 }
 
 
-.form-card:hover,
-.result-card:hover {
+.form-card:hover{
   transform: translateY(-5px);
   transition: 0.3s;
 }
@@ -594,19 +515,6 @@ select {
 
   font-size: 16px;
 }
-/* -- melhroar acessibilidade
-input,
-select {
-margin-bottom: 15px;
-padding: 14px;
-border: 1px solid transparent;
-border-radius: 12px;
-font-size: 16px;
-background: #ffffff;
-color: #1f1235;
-}
-*/
-
 
 input:focus,
 select:focus {
@@ -643,7 +551,6 @@ form button {
   cursor: pointer;
 }
 
-.hero-btn:active,
 form button:active,
 .cta-btn:active {
   transform: scale(0.97);
@@ -768,7 +675,6 @@ form button:active,
 }
 
 .card-symbol,
-.card-theme,
 .card-message {
   display: none;
 }
@@ -778,7 +684,6 @@ form button:active,
 }
 
 .shuffle-card.revealed .card-symbol,
-.shuffle-card.revealed .card-theme,
 .shuffle-card.revealed .card-message {
   display: block;
 }
@@ -788,49 +693,9 @@ form button:active,
   margin-bottom: 12px;
 }
 
-.card-theme {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-
 .card-message {
   font-size: 13px;
   line-height: 1.45;
-}
-
-.draw-section {
-  padding: 80px 20px 60px;
-  text-align: center;
-}
-
-.section-header {
-  max-width: 720px;
-  margin: 0 auto 30px;
-}
-
-.section-kicker {
-  display: inline-block;
-  margin-bottom: 12px;
-
-  color: #f5d68a;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.section-header h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 42px;
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-
-.section-header p {
-  color: #d9d3ea;
-  line-height: 1.7;
 }
 
 .draw-counter {
@@ -852,13 +717,6 @@ form button:active,
         #d6a94f
     );
 }
-
-  /*
-  background: linear-gradient(180deg, #ffe3a3, #d6a94f);
-  color: #1f1235;
-  padding: 22px 16px;
-  text-align: center;
-  animation: cardGlow 1.8s ease-in-out 2;*/
 
 .card-shuffle.reveal .card-1 {
   opacity: 0.72;
@@ -1069,44 +927,6 @@ form button:active,
   animation: cardGlow 1.8s ease-in-out 2;
 }
 
-@keyframes revealVeil {
-
-  from {
-      transform: translateY(-120px);
-      opacity: 0;
-  }
-
-  50% {
-      opacity: 1;
-  }
-
-  to {
-      transform: translateY(120px);
-      opacity: 0;
-  }
-
-}
-
-@keyframes revealMist {
-
-  0% {
-      opacity: 0;
-      transform: scale(0.5);
-  }
-
-  50% {
-      opacity: 1;
-      transform: scale(1.25);
-  }
-
-  100% {
-      opacity: 0;
-      transform: scale(1.8);
-  }
-
-}
-
-
 @keyframes mysticalFlash {
 
   0% {
@@ -1211,22 +1031,6 @@ form button:active,
   }
 }
 
-@keyframes pulseCard {
-
-  0% {
-      transform: scale(1);
-  }
-
-  50% {
-      transform: scale(1.15);
-  }
-
-  100% {
-      transform: scale(1.08);
-  }
-
-}
-
 .draw-theme-label {
   margin-bottom: 10px;
 
@@ -1327,15 +1131,6 @@ form button:active,
 
 /* RESULTADO */
 
-.result-card h2 {
-  margin-bottom: 15px;
-}
-
-.result-card p {
-  line-height: 1.6;
-  color: #e6e1f2;
-}
-
 .cta-btn {    
   display: inline-block;
   text-decoration: none;
@@ -1348,27 +1143,6 @@ form button:active,
   font-weight: bold;
   cursor: pointer;
 }
-/*
-.oracle-symbol {
-  width: 90px;
-  height: 90px;
-
-  margin: 0 auto 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: rgba(245, 214, 138, 0.12);
-  color: #f5d68a;
-
-  font-size: 34px;
-
-  border: 1px solid rgba(245, 214, 138, 0.25);
-  box-shadow: 0 0 20px rgba(245,214,138,0.15);
-}*/
 
 /* FOOTER */
 .footer {
@@ -1459,11 +1233,6 @@ Formulário: não fica esmagado*/
     display: flex;
   }
 
-  .hero-image-card {
-  width: 220px;
-  height: 300px;
-  }
-
   .hero-text {  
     padding-top: 0;
     order: 1;
@@ -1528,7 +1297,7 @@ Formulário: não fica esmagado*/
   }
 
   .carousel-arrow {
-    width: 38px;
+    width: 38px;git 
     height: 38px;
     font-size: 26px;
   }
@@ -1566,11 +1335,6 @@ Formulário: não fica esmagado*/
     text-align: center;
   }
 
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-  }
-
-
   /* FORM */
   .formulario {
     padding: 30px 16px;
@@ -1578,10 +1342,6 @@ Formulário: não fica esmagado*/
 
   .form-card {
     padding: 24px;
-  }
-
-  .result-section {
-    padding: 20px 16px;
   }
 
   .footer {
