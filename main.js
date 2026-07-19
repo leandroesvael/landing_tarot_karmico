@@ -1,36 +1,37 @@
-// main.js
+// ELEMENTOS DA INTERFACE
 
-const form = document.getElementById("oracleForm");  //  Captura formulário <form id="oracleForm"> 
-
-//draw cards
+const form = document.getElementById("oracleForm");  
+const formSuccess = document.getElementById("formSuccess");
 
 const cardMessage = document.getElementById("cardMessage");
-
 const cardShuffle = document.getElementById("cardShuffle");
+const shuffleCards = document.querySelectorAll(".shuffle-card");
+
 const drawCardBtn = document.getElementById("drawCardBtn");
 const drawCounter = document.getElementById("drawCounter");
 const drawTheme = document.getElementById("drawTheme");
 
-let freeDrawsUsed = 0;
-let maxFreeDraws = 2;
-let leadSubmitted = false;
+// ESTADO DAS LEITURAS
 
-const unlockedDrawsLimit = 5;
-const formSuccess = document.getElementById("formSuccess");
+const INITIAL_FREE_DRAWS = 2;
+const UNLOCKED_DRAWS_LIMIT = 5;
+
+let freeDrawsUsed = 0;
+let maxFreeDraws = INITIAL_FREE_DRAWS;
+let leadSubmitted = false;
 
 //google forms conexao
 const googleFormsUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeAkmIJ7xqdLKkdbch92AozzZgVXKZDba4bmqi09Pfn_ZJQlQ/formResponse";
 
-drawTheme.addEventListener("change", function() {
+const THEME_CLASSES = {
+  Amor: "amor",
+  Carreira: "carreira",
+  Espiritualidade: "espiritualidade",
+  "Decisões Importantes": "decisoes"
+};
 
-  const classesTema = {
-    "Amor": "amor",
-    "Carreira": "carreira",
-    "Espiritualidade": "espiritualidade",
-    "Decisões Importantes": "decisoes"
-  };
-
+drawTheme.addEventListener("change", function () {
   cardShuffle.classList.remove(
     "amor",
     "carreira",
@@ -38,10 +39,10 @@ drawTheme.addEventListener("change", function() {
     "decisoes"
   );
 
-  if (drawTheme.value) {
-    cardShuffle.classList.add(
-      classesTema[drawTheme.value]
-    );
+  const selectedThemeClass = THEME_CLASSES[drawTheme.value];
+
+  if (selectedThemeClass) {
+    cardShuffle.classList.add(selectedThemeClass);
   }
 });
 
@@ -54,9 +55,7 @@ function startCardDraw() {
 
   cardShuffle.classList.remove("reveal");
 
-  const cards = document.querySelectorAll(".shuffle-card");
-
-  cards.forEach(function(card) {
+  shuffleCards.forEach(function (card) {
     card.classList.remove("revealed");
   });
 
@@ -75,7 +74,7 @@ function startCardDraw() {
       const mensagemFinal =
         getRandomMessageByTheme(temaEscolhido);
 
-      cards[1].classList.add("revealed");
+      shuffleCards[1].classList.add("revealed");
       cardMessage.textContent = mensagemFinal;
 
       freeDrawsUsed++;
@@ -113,32 +112,30 @@ drawCardBtn.addEventListener("click", function() {
   startCardDraw();
 });
 
-function getRandomTheme() {
-  const temas = Object.keys(mensagens);
-  const randomIndex = Math.floor(Math.random() * temas.length);
-
-  return temas[randomIndex];
-}
-
-
 function getRandomMessageByTheme(tema) {
   const mensagensDoTema = mensagens[tema];
 
-  if (!mensagensDoTema || mensagensDoTema.length === 0) {
+  if (!mensagensDoTema?.length) {
     return "Respire fundo. Uma nova percepção pode surgir quando você observa a situação com calma.";
   }
 
-  const randomIndex = Math.floor(Math.random() * mensagensDoTema.length);
+  const randomIndex = Math.floor(
+    Math.random() * mensagensDoTema.length
+  );
+
   return mensagensDoTema[randomIndex];
 }
 
-
 function updateDrawCounter() {
   const remainingDraws = maxFreeDraws - freeDrawsUsed;
+  const messageLabel =
+  remainingDraws === 1
+    ? "mensagem disponível"
+    : "mensagens disponíveis";
 
   if (remainingDraws > 0) {
     drawCounter.textContent =
-      `Você ainda tem ${remainingDraws} mensagem(ns) disponível(is).`;
+      `Você ainda tem ${remainingDraws} ${messageLabel}.`;
     return;
   }
 
@@ -154,9 +151,9 @@ function updateDrawCounter() {
 form.addEventListener("submit", function(event) {
   event.preventDefault();
 
-  const nome = document.getElementById("name").value;
-  const whatsapp = document.getElementById("whatsapp").value;
-  const email = document.getElementById("email").value;  
+  const name = document.getElementById("name").value.trim();
+  const whatsapp = document.getElementById("whatsapp").value.trim();
+  const email = document.getElementById("email").value.trim();
   const contactTime = document.getElementById("contactTime").value;
   const contactPermission = document.getElementById("contactPermission").checked;
 
@@ -166,7 +163,7 @@ form.addEventListener("submit", function(event) {
   }
   
   const lead = {
-    nome: nome,
+    nome: name,
     whatsapp: whatsapp,
     email: email,    
     melhorHorario: contactTime,
@@ -178,7 +175,7 @@ form.addEventListener("submit", function(event) {
   sendLeadToGoogleForms(lead);
 
   leadSubmitted = true;
-  maxFreeDraws = unlockedDrawsLimit;
+  maxFreeDraws = UNLOCKED_DRAWS_LIMIT;
 
   updateDrawCounter();
 
