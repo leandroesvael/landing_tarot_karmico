@@ -138,9 +138,6 @@ background: linear-gradient(90deg, transparent, #f5d68a, transparent); /*luz ─
   padding-top: 115px;
 }
 
-.hero-text .hero-btn {
-margin-top: 30px;
-}
 
 .hero h1 {
   font-size: 52px;
@@ -171,34 +168,15 @@ margin-top: 30px;
   display: block;
 }
 
-.hero-btn {
-
-display: inline-block;    
-text-decoration: none; /* já precisava mesmo */
-
-margin-top: 30px;
-
-padding: 14px 28px;
-
-border: none;
-border-radius: 30px;
-
-background: linear-gradient(45deg, #f5d68a, #ffd700);
-color: #1f1235;
-
-font-size: 16px;
-font-weight: bold;
-
-cursor: pointer;
-}
-
 .hero-btn,
 form button,
 .cta-btn {
-  transition: all 0.2s ease;
-}
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+  }
 
-.hero-btn:hover,
 form button:hover,
 .cta-btn:hover {
   transform: translateY(-2px) scale(1.03);
@@ -445,16 +423,22 @@ background: rgba(245,214,138,0.22);
   line-height: 1.7;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
+@keyframes revealMist {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
   }
 
   50% {
-    transform: translateY(12px);
+    opacity: 1;
+    transform: scale(1.25);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
   }
 }
-
 
 /* FORM */
 
@@ -473,25 +457,20 @@ html {
   max-width: 520px;
 
   background: rgba(255,255,255,0.08);
-
   padding: 30px;
-
-  /*border-radi us: 20px;*/
   border-radius: 16px;
-
   backdrop-filter: blur(10px);
-  
   border: 1px solid rgba(255,255,255,0.12);
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25),
-  inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.08);
 
+  transition: transform 0.3s ease;
 }
 
-
-.form-card:hover{
+.form-card:hover {
   transform: translateY(-5px);
-  transition: 0.3s;
 }
 
 
@@ -662,25 +641,12 @@ form button:active,
   
 /* SORTEIO GRATUITO */
 
-.hero-oracle {
-  text-align: center;
-}
-
 .hero-oracle .cta-btn {
   margin-top: 10px;
 }
 
 .hero-oracle .draw-counter {
   margin-top: 14px;
-}
-
-.card-symbol,
-.card-message {
-  display: none;
-}
-
-.shuffle-card.revealed::after {
-  content: "";
 }
 
 .shuffle-card.revealed .card-symbol,
@@ -696,26 +662,13 @@ form button:active,
 .card-message {
   font-size: 13px;
   line-height: 1.45;
+  display: none;
 }
 
 .draw-counter {
   margin-top: 18px;
   color: #d9d3ea;
   font-size: 15px;
-}
-
-.shuffle-card {
-  cursor: pointer;
-}
-
-.shuffle-card.revealed {
-  background-image: none;
-  background:
-    radial-gradient(
-        circle at center,
-        #fff0c9,
-        #d6a94f
-    );
 }
 
 .card-shuffle.reveal .card-1 {
@@ -735,36 +688,9 @@ form button:active,
 }
 
 .card-shuffle.reveal .card-2 {
-  transform: translateY(-10px) scale(1.08);
+  transform: translateY(-12px) scale(1.08);      
   z-index: 15;
 }
-
-/*.card-shuffle.reveal .card-2 {
-    transform:
-        scale(1.15);
-}
-.card-shuffle.reveal .card-3 {
-  transform: rotate(10deg) translateX(90px);
-}        
-.card-shuffle.reveal .card-1 {
-  transform: rotate(-10deg) translateX(-90px);
-}
-*/
-
-.card-shuffle.reveal .card-2 {
-  transform:
-     /* rotate(0deg)      */
-      translateY(-12px)
-     /* translateX(0)*/
-      scale(1.08);      
-  z-index: 15;
-}
-/*
-.card-shuffle.reveal .card-2 {
-  transform: rotate(0deg) translateX(0) scale(1.08);
-  z-index: 5;
-}*/
-
 
 .card-shuffle {
   position: relative;
@@ -790,6 +716,7 @@ form button:active,
   box-shadow:
   0 20px 40px rgba(0,0,0,0.35),
   0 0 25px rgba(245,214,138,0.12);
+  cursor: pointer;
 }
 
 .card-1 {
@@ -819,19 +746,6 @@ form button:active,
 
 .card-shuffle.shuffle .card-3 {
   animation: shuffleRight 0.9s ease infinite alternate;
-}
-
-
-.card-shuffle.settling .card-1 {
-  transform: rotate(-8deg) translateX(-18px);
-}
-
-.card-shuffle.settling .card-2 {
-  transform: rotate(3deg);
-}
-
-.card-shuffle.settling .card-3 {
-  transform: rotate(10deg) translateX(18px);
 }
 
 .card-shuffle.flash {
@@ -905,15 +819,20 @@ form button:active,
 }
 */
 
+.symbol {
+ color: #f5d68a;
+ font-size: 18px;
+}
+
 .card-shuffle .shuffle-card.revealed {
-  background-image: none !important;
+  background-image: none;
 
   background:
     radial-gradient(
       circle at center,
       #fff0c9,
       #d6a94f
-    ) !important;
+    );
 
   color: #1f1235;
   padding: 22px 16px;
@@ -1031,15 +950,6 @@ form button:active,
   }
 }
 
-.draw-theme-label {
-  margin-bottom: 10px;
-
-  color: #d9d3ea;
-
-  font-size: 15px;
-}
-
-
 .draw-theme-select {
   width: 100%;
   max-width: 340px;
@@ -1122,11 +1032,6 @@ form button:active,
   text-align: center;
 }
 
-/* SORTE DO DIA*/
-/*.draw-theme-select,
-.draw-theme-label {
-  display: none;
-}*/
 
 
 /* RESULTADO */
@@ -1170,11 +1075,6 @@ form button:active,
   transition: 0.3s;
 }
 
-.grupo {
-  margin-top: 12px;
-  font-size: 18px;
-  color: rgba(252, 255, 222, 0.75);
-}
 
 /* RESPONSIVO - TABLET E CELULAR */
 /*Desktop: continua largo e elegante
@@ -1253,19 +1153,6 @@ Formulário: não fica esmagado*/
   .hero-text::before {
   margin: 0 auto 30px auto;
   }
-
-  /*.card-shuffle.reveal .card-1 {
-    transform: rotate(-8deg) translateX(-40px);
-  }
-
-  .card-shuffle.reveal .card-2 {
-    transform: scale(1.05);
-  }
-
-  .card-shuffle.reveal .card-3 {
-    transform: rotate(8deg) translateX(40px);
-  }*/
-
   
   .card-shuffle.reveal .card-1 {
     opacity: 0.58;
@@ -1297,18 +1184,13 @@ Formulário: não fica esmagado*/
   }
 
   .carousel-arrow {
-    width: 38px;git 
+    width: 38px;
     height: 38px;
     font-size: 26px;
   }
 
   .hero-btn {
   margin-top: 30px;
-  }
-
-  .hero-visual {
-  display: flex;
-  justify-content: center;
   }
 
   .hero h1 {
@@ -1368,12 +1250,14 @@ Formulário: não fica esmagado*/
     font-size: 15px;
   }
 
-  .hero-btn,
   form button,
   .cta-btn {
     width: 100%;
   }
 
+  .cta-btn {
+    max-width: 340px;
+  }
   
   .phone-frame {
     width: min(330px, 80vw);
@@ -1386,18 +1270,6 @@ Formulário: não fica esmagado*/
   }
 
   
-  input,
-  select {
-    margin-bottom: 15px;
-    padding: 14px;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    font-size: 16px;
-    background: #ffffff;
-    color: #1f1235;
-  }
-
-
   .whatsapp-btn,
   .continue-link {
     width: 100%;
