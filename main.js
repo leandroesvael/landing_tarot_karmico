@@ -2,6 +2,7 @@
 
 const form = document.getElementById("oracleForm");  
 const formSuccess = document.getElementById("formSuccess");
+const formSubmitButton = form.querySelector('button[type="submit"]');
 
 const cardMessage = document.getElementById("cardMessage");
 const cardShuffle = document.getElementById("cardShuffle");
@@ -158,8 +159,11 @@ function updateDrawCounter() {
   }
 }
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", async function(event) {
   event.preventDefault();
+
+  formSubmitButton.disabled = true;
+  formSubmitButton.textContent = "Enviando...";
 
   const name = document.getElementById("name").value.trim();
   const whatsapp = document.getElementById("whatsapp").value.trim();
@@ -169,6 +173,11 @@ form.addEventListener("submit", function(event) {
 
   if (!contactPermission) {
     alert("Você precisa aceitar o contato para continuar.");
+
+    formSubmitButton.disabled = false;
+    formSubmitButton.textContent =
+    "Enviar e liberar novas mensagens";
+
     return;
   }
   
@@ -181,24 +190,35 @@ form.addEventListener("submit", function(event) {
     dataCadastro: new Date().toLocaleString("pt-BR")
   };
 
-  saveLeadLocalStorage(lead);
-  sendLeadToGoogleForms(lead);
+  try {
+    await sendLeadToGoogleForms(lead);
+    saveLeadLocalStorage(lead);
 
-  leadSubmitted = true;
-  maxFreeDraws = UNLOCKED_DRAWS_LIMIT;
+    leadSubmitted = true;
+    maxFreeDraws = UNLOCKED_DRAWS_LIMIT;
 
-  updateDrawCounter();
+    updateDrawCounter();
 
-  form.reset();
+    form.reset();
+    formSuccess.classList.add("show");
 
-  formSuccess.classList.add("show");
+    setTimeout(function () {
+      formSuccess.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 150);
+    } catch (error) {
+      console.error("Erro ao enviar formulário:", error);
 
-  setTimeout(function() {
-    formSuccess.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }, 150);
+      alert(
+        "Não foi possível enviar seus dados. Verifique sua conexão e tente novamente."
+      );
+
+      formSubmitButton.disabled = false;
+      formSubmitButton.textContent =
+        "Enviar e liberar novas mensagens";
+    }
 });
 
 
@@ -219,7 +239,7 @@ function sendLeadToGoogleForms(lead) {
   formData.append("entry.1515234327", lead.email);  
   formData.append("entry.1924634358", lead.melhorHorario);
 
-  fetch(googleFormsUrl, {
+  return fetch(googleFormsUrl, {
     method: "POST",
     mode: "no-cors",
     body: formData
