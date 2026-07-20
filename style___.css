@@ -185,40 +185,32 @@ form button:hover,
 
 .card-shuffle.amor .shuffle-card {
   
- background-image: url("imagens/verso_amor.jpg"),
-  linear-gradient(
+ background-image: url("imagens/verso_amor.jpg");
+/*
+  background: linear-gradient(
     180deg,
     #5d2141,
     #a63f73
-  );
+  );*/
 }
 
 .card-shuffle.carreira .shuffle-card {
   
-  background-image: url("imagens/verso_carreira.png"),
-    linear-gradient(
+  background-image: url("imagens/verso_carreira.png");
+/*
+  background: linear-gradient(
     180deg,
     #4a3b17,
     #c29b34
-  );
+  );*/
 }
 
 .card-shuffle.espiritualidade .shuffle-card {
-  background-image: url("imagens/verso_espiritual.png"),
-    linear-gradient(
-    180deg,
-    #34174a,
-    #8e0736
-  );
+  background-image: url("imagens/verso_espiritual.png");
 }
 
 .card-shuffle.decisoes .shuffle-card {
-   background-image: url("imagens/verso_decisoes.png"),
-    linear-gradient(
-    180deg,
-    #13abe7,
-    #12078e
-  );
+   background-image: url("imagens/verso_decisoes.png");
 }
 
 /* SOBRE A CONSULTA */
@@ -297,13 +289,6 @@ background: rgba(245,214,138,0.22);
 .phone-frame {
   position: relative;
   width: min(360px, 90vw);
-  cursor: grab;
-  touch-action: pan-y;
-}
-
-.phone-frame.dragging {
-  cursor: grabbing;
-  user-select: none;
 }
 
 .phone-frame-image {
@@ -407,34 +392,6 @@ background: rgba(245,214,138,0.22);
 .community-section > .section-cta {
   margin-top: 22px;
 }
-
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 22px;
-}
-
-.carousel-dot {
-  width: 10px;
-  height: 10px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.28);
-  cursor: pointer;
-
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.carousel-dot.active {
-  background: #f5d68a;
-  transform: scale(1.25);
-}
-
   /* FAQ */
 
 .faq-section {

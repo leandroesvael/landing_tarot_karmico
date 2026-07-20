@@ -98,13 +98,23 @@ drawCardBtn.addEventListener("click", function() {
   }
 
   if (freeDrawsUsed >= maxFreeDraws) {
+  if (!leadSubmitted) {
     drawCounter.textContent =
       "Para continuar sua leitura, preencha o formulário abaixo.";
 
-    form.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+      form.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    } else {
+      drawCounter.textContent =
+        "Você usou suas mensagens liberadas. Fale pelo WhatsApp para aprofundar sua leitura.";
+
+      formSuccess.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
 
     return;
   }
