@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oráculo Pessoal</title>
-
-  <title>Oráculo Pessoal</title>
+  <title>Oráculo Diário</title>
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PR1HPZRYSS"></script>
@@ -34,13 +32,13 @@
   <!-- HEADER -->
   <header class="header">
     <div class="header-content">
-      <div class="logo">Oráculo Pessoal</div>
+      <div class="logo">Oráculo Diário</div>
 
       <nav class="menu">
-        <!--<a href="#hero">Início</a>-->
-        <a href="#como-funciona">Como funciona</a>
+        <a href="#hero"><span class="highlight">Orientação do Dia</span></a>
+        <a href="#comunidade">Comunidade</a>
         <a href="#sobre">Sobre</a>
-        <a href="#pre-form">Experimente</a>
+        <a href="#formulario">Contato</a>
       </nav>
     </div>
   </header>
@@ -51,61 +49,185 @@
     <div class="hero-content">
       <div class="hero-text">
         <h1>
-          Receba uma 
-          <span class="highlight"> mensagem personalizada </span>
-          sobre seu momento atual
+          Revele uma mensagem para o <span class="highlight">seu momento</span>. 
         </h1>
-        <p>
-          Receba uma mini leitura espiritual baseada no tema que você escolher
-          (amor, carreira, espiritualidade, decisões).
+
+        <p>          
+          Uma orientação simbólica inicial para <span class="highlight">amor, carreira,
+          espiritualidade</span> ou decisões importantes.
         </p>
-
-        <a href="#como-funciona" class="hero-btn">Descobrir Como Funciona</a>
       </div>
 
-      <div class="hero-visual">
-        <div class="hero-image-card">
-          <img src="imagens/ESTRELA2.png" alt="Cartas de tarot e cristal sobre mesa">
+      <div class="hero-oracle">
+        <p class="draw-theme-label">Primeiro, escolha o tema da sua mensagem</p>
+        <select id="drawTheme" class="draw-theme-select" aria-describedby="drawError">
+          <option value="">Escolha um tema</option>
+          <option value="Amor">Amor</option>
+          <option value="Carreira">Carreira</option>
+          <option value="Espiritualidade">Espiritualidade</option>
+          <option value="Decisões Importantes">Decisões Importantes</option>
+        </select>
+        
+        <p id="drawError" class="feedback-message" role="alert" aria-live="assertive"></p>
+
+        <div id="cardShuffle" class="card-shuffle">
+            <button class="shuffle-card card-1" type="button"></button>
+
+            <button class="shuffle-card card-2" type="button">
+              <span class="card-symbol">⛤</span>
+              <span id="cardMessage" class="card-message"></span>
+            </button>
+
+            <button class="shuffle-card card-3" type="button"></button>
         </div>
-      </div>
-    </div>
 
+        <button id="drawCardBtn" class="cta-btn" type="button">
+          Revelar minha carta
+        </button>
+
+        <p id="drawCounter" class="draw-counter">
+          Você pode receber até <span class="highlight">2 mensagens gratuitas</span>.
+        </p>
+      </div>
+
+      <div class="hero-ambient-image">
+        <img src="imagens/mesa-tarot.png" 
+          alt="Mesa de leitura com cartas e vela"
+          decoding="async"
+        >
+      </div>
+    </div>    
   </section>
 
-  <section class="steps-section" id="como-funciona">
+  <section class="community-section" id="comunidade">
 
-    <h2 class="section-title">Como Funciona</h2>
+    <div class="community-header">
+      <h2 class="section-title">
+        <span class="symbol">✨</span>
+        <span class="highlight">Tarot Karmico </span>
+        <span class="symbol">✨</span> Uma comunidade construída
+        ao longo dos anos
+      </h2>
 
-    <div class="steps-grid">
+      <p>
+        Conteúdos, mensagens e atendimentos acompanhados por milhares de pessoas.
+      </p>
+    </div>
 
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <h3>Escolha um tema</h3>
-        <p>Selecione o assunto que deseja explorar na leitura.</p>
+    <div class="phone-carousel">
+
+      <button
+        class="carousel-arrow carousel-prev"
+        type="button"
+        aria-label="Mostrar conteúdo anterior"
+      >
+        ‹
+      </button>
+
+      <div class="phone-frame" id="phoneCarousel">
+
+        <div class="phone-slides">
+
+          <div class="slide active">
+            <img
+              src="imagens/youtube-canal.png"
+              alt="Página do canal Tarot Kármico no YouTube"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+
+          <div class="slide">
+            <img
+              src="imagens/youtube-comentarios.jpg"
+              alt="Comentários da comunidade no YouTube"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+
+          <div class="slide">
+            <img
+              src="imagens/consulta-online.jpg"
+              alt="Exemplo de consulta online de Tarot"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+
+          <div class="slide">
+            <img
+              src="imagens/whatsapp.jpg"
+              alt="Exemplo de atendimento pelo WhatsApp"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+
+        </div>
+
+        <img
+          class="phone-frame-image"
+          src="imagens/smartphone.webp"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        >
+
       </div>
 
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <h3>Receba sua mensagem</h3>
-        <p>Descubra uma orientação inicial para seu momento atual.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <h3>Agende sua consulta</h3>
-        <p>Converse diretamente pelo WhatsApp para uma leitura completa.</p>
-      </div>
+      <button
+        class="carousel-arrow carousel-next"
+        type="button"
+        aria-label="Mostrar próximo conteúdo"
+      >
+        ›
+      </button>
 
     </div>
-  </section>
 
+    <div class="carousel-dots" aria-label="Navegação do carrossel">
+
+      <button
+        class="carousel-dot active"
+        type="button"
+        data-slide="0"
+        aria-label="Mostrar canal no YouTube"
+      ></button>
+
+      <button
+        class="carousel-dot"
+        type="button"
+        data-slide="1"
+        aria-label="Mostrar comentários"
+      ></button>
+
+      <button
+        class="carousel-dot"
+        type="button"
+        data-slide="2"
+        aria-label="Mostrar consulta online"
+      ></button>
+
+      <button
+        class="carousel-dot"
+        type="button"
+        data-slide="3"
+        aria-label="Mostrar atendimento pelo WhatsApp"
+      ></button>
+
+    </div>
+
+    <p class="carousel-caption" id="carouselCaption">
+      Uma comunidade que acompanha o Tarot Kármico através do YouTube.
+    </p>
+      <a href="#formulario" class="section-cta">Quero mais leituras</a>     
+  </section>  
+  
   <section class="about-section" id="sobre">
 
     <div class="about-content">
-
-      <div class="about-image">
-        <img src="imagens/mesa-tarot.png" alt="Mesa de leitura">
-      </div>
 
       <div class="about-text">
 
@@ -120,247 +242,182 @@
           O Tarot é utilizado como ferramenta simbólica para ampliar
           a percepção sobre situações pessoais, profissionais e espirituais.
         </p>
-        
-        <div class="social-links">
 
-          <p class="social-title">
-            Conheça mais conteúdos gratuitos:
-          </p>
-
-          <a
-            href="https://youtube.com/@tarotkarmico"
-            target="_blank"
-            class="social-link"
-          >
-            ▶ YouTube
-          </a>
-
-          <a
-            href="https://www.instagram.com/tarotkarmico?igsh=cjYzNDd5azB4c3Zo"
-            target="_blank"
-            class="social-link"
-          >
-            📸 Instagram
-          </a>
-
-          <a
-            href="https://wa.me/5551993044478"
-            target="_blank"
-            class="social-link"
-          >
-            💬 WhatsApp
-          </a>
-
-        </div>
-
-        <a href="#formulario" class="section-cta">Quero Uma Leitura</a>
-
-      </div>
+          
+      <a href="https://wa.me/5551993044478" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+        Chamar direto no whatsapp
+      </a>
+    </div>
 
     </div>
 
   </section>
 
-  <section class="testimonials-section" id="depoimentos">
+  
+  <!-- FORMULÁRIO -->
+  <section class="formulario" id="formulario">
+    <div class="form-card">
+  
+      <h2 class="section-title">
+        Quer <span class="highlight">continuar</span>
+        sua leitura? <span class="highlight">✦</span>
+      </h2>
+  
+      <p class="form-intro">
+        Preencha seus dados para liberar <span class="highlight">novas mensagens</span>. 
+        Aproveite e entre em contato para uma leitura <span class="highlight">completa de Tarot</span>.
+      </p>
+  
+      <form id="oracleForm">
+        <label for="name">Seu nome</label>
 
-    <h2 class="section-title">Depoimentos</h2>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Digite seu nome"
+          autocomplete="name"
+          required
+        >
+        <label for="whatsapp">Seu WhatsApp</label>
 
-    <div class="testimonials-grid">
+        <input
+          type="tel"
+          id="whatsapp"
+          name="whatsapp"
+          placeholder="(00) 00000-0000"
+          autocomplete="tel"
+          inputmode="tel"
+          required
+        >
+      
+        <label for="email">Seu e-mail <span class="optional-field">(opcional)</span></label>
 
-      <div class="testimonial-card">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="nome@exemplo.com"
+          autocomplete="email"
+        >
+        
+        <label for="contactTime">Melhor horário para contato</label>
+
+        <select
+          id="contactTime"
+          name="contactTime"
+          required
+        >
+          <option value="">Selecione um horário</option>
+          <option value="Manhã">Manhã</option>
+          <option value="Tarde">Tarde</option>
+          <option value="Noite">Noite</option>
+        </select>
+  
+        <label class="checkbox-field">
+          <input type="checkbox" id="contactPermission" aria-describedby="formError">
+          Aceito receber contato sobre a consulta online.
+        </label>
+
+        <p
+          id="formError"
+          class="feedback-message"
+          role="alert"
+          aria-live="assertive"
+        ></p>
+        
+        <button type="submit">
+          Enviar e liberar novas mensagens
+        </button>
+      </form>
+  
+      <div
+        id="formSuccess"
+        class="form-success"
+        role="status"
+        aria-live="polite"
+        tabindex="-1"
+      >
+        <div class="success-symbol">✦</div>
+      
+        <h3>Dados enviados com sucesso</h3>
+      
         <p>
-          "A mensagem me ajudou a refletir sobre uma decisão
-          importante que eu vinha adiando."
+          Suas novas mensagens foram liberadas. Em breve, o contato poderá ser feito
+          pelo WhatsApp para combinar uma leitura completa.
         </p>
-
-        <span>★★★★★</span>
+        <a
+          class="whatsapp-btn"
+          href="https://wa.me/5551993044478?text=Ol%C3%A1%2C%20recebi%20minhas%20mensagens%20no%20Or%C3%A1culo%20Di%C3%A1rio%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20consulta."
+          target="_blank"
+          rel="noopener noreferrer"
+        >      
+        <a class="continue-link" href="#hero">
+          Voltar para as cartas
+        </a>
       </div>
-
-      <div class="testimonial-card">
-        <p>
-          "Gostei da forma acolhedora e objetiva como a leitura
-          trouxe novos pontos de vista."
-        </p>
-
-        <span>★★★★★</span>
-      </div>
-
-      <div class="testimonial-card">
-        <p>
-          "Uma experiência leve, que trouxe tranquilidade e
-          clareza para o momento que estou vivendo."
-        </p>
-
-        <span>★★★★★</span>
-      </div>
-
+  
     </div>
   </section>
 
   <section class="faq-section" id="faq"> 
 
-  <h2 class="section-title">Perguntas Frequentes</h2>
+    <h2 class="section-title">Perguntas Frequentes</h2>
 
-  <div class="faq-list">
+    <div class="faq-list">
 
-    <div class="faq-item">
-      <h3>A leitura inicial é gratuita?</h3>
-      <p>Sim. A mensagem inicial é gratuita e serve como uma primeira orientação simbólica.</p>
-    </div>
+      <!--<div class="faq-item">
+        <h3>A leitura inicial é gratuita?</h3>
+        <p>Sim. A mensagem inicial é gratuita e serve como uma primeira orientação simbólica.</p>
+      </div>-->
 
-    <div class="faq-item">
-      <h3>A consulta completa é online?</h3>
-      <p>Sim. O contato é feito pelo WhatsApp para combinar o melhor formato e horário.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Preciso acreditar em Tarot?</h3>
-      <p>Não. A leitura pode ser usada como uma ferramenta de reflexão e autoconhecimento.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Quais temas posso escolher?</h3>
-      <p>Amor, carreira, espiritualidade e decisões importantes.</p>
-    </div>
-
-  </div>
-
-</section>
-
-<section class="pre-form-section" id="pre-form">
-  <div class="chamada-final">
-
-    <h2 class="section-title">
-      Pronto para <span class="highlight">iniciar</span> sua leitura?
-    </h2>
-
-    <p>
-      Sua mensagem está a um passo de distância.
-    </p>
-
-    <a href="#formulario" class="indicador">
-      ↓
-    </a>
-
-  </div>
-
-</section>
-
-  <!-- FORMULÁRIO -->
-  <section class="formulario" id="formulario">
-
-    <div class="form-card">
-
-      <h2 class="section-title">
-        Sua <span class="highlight">leitura</span>
-        começa aqui <span class="highlight">✦</span>
-      </h2>
-      <form id="oracleForm">
-
-        <input
-          type="text"
-          id="name"
-          placeholder="Seu nome"
-          required
-        >
-
-        <input
-        type="tel"
-        id="whatsapp"
-        placeholder="Seu WhatsApp"
-        required
-        >
-
-        <input
-        type="email"
-        id="email"
-        placeholder="Seu e-mail"
-        >
-
-
-        <select id="theme" required>
-          <option value="">Tema da consulta</option>
-          <option value="Amor">Amor</option>
-          <option value="Carreira">Carreira</option>
-          <option value="Espiritualidade">Espiritualidade</option>
-          <option value="Decisões Importantes">Decisões Importantes</option>
-        </select>
-
-        <select id="contactTime" required>
-          <option value="">Melhor horário para contato</option>
-          <option value="Manhã">Manhã</option>
-          <option value="Tarde">Tarde</option>
-          <option value="Noite">Noite</option>
-        </select>
-
-        <label class="checkbox-field">
-          <input type="checkbox" id="contactPermission" required>
-          Aceito receber contato sobre a consulta online.
-        </label>
-        
-
-        <button type="submit">
-          Receber Minha Mensagem
-        </button>
-
-      </form>
-
-    </div>
-
-  </section>
-
-  <!-- RESULTADO -->
-  <section class="result-section">
-
-    <div id="resultCard" class="result-card hidden">
-
-      <div class="oracle-symbol">
-        ✦
+      <div class="faq-item">
+        <h3>A consulta completa é online?</h3>
+        <p>Sim. O contato é feito pelo WhatsApp para combinar o melhor formato e horário.</p>
       </div>
 
-      <h2 class="section-title">Sua Mensagem</h2>
-
-      <p id="resultText"></p>
-
-      <a
-          class="cta-btn"
-          href="https://wa.me/5551998069337?text=Olá,%20quero%20agendar%20uma%20consulta%20online."
-          target="_blank"
-        >
-          Quero Agendar uma Consulta
-      </a>
+      <div class="faq-item">
+        <h3>Preciso acreditar em Tarot?</h3>
+        <p>Não. A leitura pode ser usada como uma ferramenta de reflexão e autoconhecimento.</p>
+      </div>
+      <!--
+      <div class="faq-item">
+        <h3>Quais temas posso escolher?</h3>
+        <p>Amor, carreira, espiritualidade e decisões importantes.</p>
+      </div>-->
 
     </div>
 
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer" id="contato">
-    <p>© 2026 Oráculo Pessoal</p>
+  <footer class="footer" id="contato">    
        <div class="footer-social">
           <a
-            href="https://www.instagram.com/tarotkarmico?igsh=cjYzNDd5azB4c3Zo"
+            href="https://www.instagram.com/tarotkarmico/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Instagram
           </a>
-
+          <!--
           <a
             href="https://youtube.com/@tarotkarmico"
             target="_blank"
           >
             YouTube
           </a>
-
+          -->
           <a
             href="https://wa.me/5551993044478"
             target="_blank"
+            rel="noopener noreferrer"
           >
             WhatsApp
           </a>
 
-        </div>     
-    <p class="grupo">Projeto desenvolvido por: Leandro Acacio Esvael</p>
+        </div>         
+        <p>© 2026 Oráculo Pessoal | desenvolvido por @leandroesvael</p>
   </footer>
 
   <!-- JS -->

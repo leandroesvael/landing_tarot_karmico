@@ -257,3 +257,30 @@ plays++;
 localStorage.setItem("plays", plays);
 ```
 
+#
+```css
+trocar
+input,
+select {
+  padding: 14px;
+}
+
+por.. @revisar
+#oracleForm > input,
+#oracleForm > select {
+  margin-bottom: 15px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+#oracleForm > input:focus,
+#oracleForm > select:focus {
+  outline: none;
+  border: 1px solid #f5d68a;
+  box-shadow: 0 0 10px rgba(245, 214, 138, 0.4);
+}
+
+
+```
