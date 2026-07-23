@@ -11,6 +11,7 @@
 body {
   font-family: 'Inter', sans-serif; /*2 opcoes*/
 
+  background-color: #120b24;
   background:
     linear-gradient(
       180deg,
@@ -24,6 +25,8 @@ body {
   min-height: 100vh; /* viewport height  - toda tela*/
   position: relative;
   overflow-x: hidden; /* esconder se algo ultrapassar*/
+
+  isolation: isolate;
 }
 
 body::after { /*elemento virtual*/
@@ -35,7 +38,7 @@ body::after { /*elemento virtual*/
   background-position: center;
   opacity: 0.62;
   pointer-events: none; /*nao eh afetada por cliques*/
-  z-index: -2; /* layer */
+  z-index: -1; /* layer */
 }
 
 /*body::before {
