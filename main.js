@@ -11,8 +11,8 @@ const shuffleCards = document.querySelectorAll(".shuffle-card");
 const shuffleSound = new Audio("audio/embaralhar.wav");
 const revealSound = new Audio("audio/revelacao.mp3");
 
-shuffleSound.volume = 0.25;
-revealSound.volume = 0.35;
+shuffleSound.volume = 0.20;
+revealSound.volume = 0.20;
 
 const drawCardBtn = document.getElementById("drawCardBtn");
 const drawCounter = document.getElementById("drawCounter");

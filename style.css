@@ -218,7 +218,7 @@ form button:hover,
 
 .card-shuffle.carreira .shuffle-card {
   
-  background-image: url("imagens/verso_carreira.png"),
+  background-image: url("imagens/verso_carreira.webp"),
     linear-gradient(
     180deg,
     #4a3b17,
@@ -227,7 +227,7 @@ form button:hover,
 }
 
 .card-shuffle.espiritualidade .shuffle-card {
-  background-image: url("imagens/verso_espiritual.png"),
+  background-image: url("imagens/verso_espiritual.webp"),
     linear-gradient(
     180deg,
     #34174a,
@@ -236,7 +236,7 @@ form button:hover,
 }
 
 .card-shuffle.decisoes .shuffle-card {
-   background-image: url("imagens/verso_decisoes.png"),
+   background-image: url("imagens/verso_decisoes.webp"),
     linear-gradient(
     180deg,
     #13abe7,
@@ -839,7 +839,7 @@ form button:active,
 
   border-radius: 16px;
 
-  background-image: url("imagens/verso_tarot.png");
+  background-image: url("imagens/verso_tarot.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
