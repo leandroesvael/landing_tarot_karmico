@@ -34,14 +34,34 @@
   <!-- HEADER -->
   <header class="header">
     <div class="header-content">
-      <div class="logo">Oráculo Diário</div>
 
-      <nav class="menu">
-        <a href="#hero"><span class="highlight">Orientação do Dia</span></a>
+      <div class="logo">
+        Oráculo Diário
+      </div>
+
+      <button
+        id="menuToggle"
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menu"
+        aria-controls="mainMenu"
+        aria-expanded="false"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+
+      <nav id="mainMenu" class="menu">
+        <a href="#hero">
+          <span class="highlight">Orientação do Dia</span>
+        </a>
+
         <a href="#comunidade">Comunidade</a>
         <a href="#sobre">Sobre</a>
         <a href="#formulario">Contato</a>
       </nav>
+
     </div>
   </header>
 

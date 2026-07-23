@@ -22,6 +22,13 @@ const drawError = document.getElementById("drawError");
 const formError = document.getElementById("formError");
 const contactPermissionField = document.getElementById("contactPermission");
 
+const menuToggle = document.getElementById("menuToggle");
+const mainMenu = document.getElementById("mainMenu");
+const menuLinks = mainMenu
+  ? mainMenu.querySelectorAll("a")
+  : [];
+
+
 // ESTADO DAS LEITURAS
 
 const INITIAL_FREE_DRAWS = 2;
@@ -59,6 +66,52 @@ drawTheme.addEventListener("change", function () {
     cardShuffle.classList.add(selectedThemeClass);
   }
 });
+
+function setMenuState(isOpen) {
+  if (!menuToggle || !mainMenu) {
+    return;
+  }
+
+  mainMenu.classList.toggle("open", isOpen);
+
+  menuToggle.setAttribute(
+    "aria-expanded",
+    String(isOpen)
+  );
+
+  menuToggle.setAttribute(
+    "aria-label",
+    isOpen ? "Fechar menu" : "Abrir menu"
+  );
+}
+
+if (menuToggle && mainMenu) {
+  menuToggle.addEventListener("click", function () {
+    const isOpen =
+      menuToggle.getAttribute("aria-expanded") === "true";
+
+    setMenuState(!isOpen);
+  });
+
+  menuLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      setMenuState(false);
+    });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      setMenuState(false);
+      menuToggle.focus();
+    }
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 768) {
+      setMenuState(false);
+    }
+  });
+}
 
 function playSound(audio) {
   audio.currentTime = 0;
