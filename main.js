@@ -8,9 +8,19 @@ const cardMessage = document.getElementById("cardMessage");
 const cardShuffle = document.getElementById("cardShuffle");
 const shuffleCards = document.querySelectorAll(".shuffle-card");
 
+const shuffleSound = new Audio("audio/embaralhar.wav");
+const revealSound = new Audio("audio/revelacao.wav");
+
+shuffleSound.volume = 0.25;
+revealSound.volume = 0.35;
+
 const drawCardBtn = document.getElementById("drawCardBtn");
 const drawCounter = document.getElementById("drawCounter");
 const drawTheme = document.getElementById("drawTheme");
+
+const drawError = document.getElementById("drawError");
+const formError = document.getElementById("formError");
+const contactPermissionField = document.getElementById("contactPermission");
 
 // ESTADO DAS LEITURAS
 
@@ -33,6 +43,9 @@ const THEME_CLASSES = {
 };
 
 drawTheme.addEventListener("change", function () {
+  clearFeedback(drawError);
+  drawTheme.removeAttribute("aria-invalid");
+
   cardShuffle.classList.remove(
     "amor",
     "carreira",
@@ -47,9 +60,41 @@ drawTheme.addEventListener("change", function () {
   }
 });
 
+function playSound(audio) {
+  audio.currentTime = 0;
+
+  audio.play().catch(function () {
+    // O navegador pode bloquear ou falhar ao reproduzir.
+  });
+}
+
+function stopSound(audio) {
+  audio.pause();
+  audio.currentTime = 0;
+}
+
+function showFeedback(element, message) {
+  element.textContent = message;
+  element.classList.add("show");
+}
+
+function clearFeedback(element) {
+  element.textContent = "";
+  element.classList.remove("show");
+}
+
+contactPermissionField.addEventListener("change", function () {
+  if (contactPermissionField.checked) {
+    clearFeedback(formError);
+    contactPermissionField.removeAttribute("aria-invalid");
+  }
+});
+
 function startCardDraw() {
 
   const temaEscolhido = drawTheme.value;
+
+  playSound(shuffleSound);
 
   drawCardBtn.disabled = true;
   drawCardBtn.textContent = "Embaralhando...";  
@@ -71,6 +116,9 @@ function startCardDraw() {
 
       cardShuffle.classList.remove("flash");
       cardShuffle.classList.add("reveal");
+
+      stopSound(shuffleSound);
+      playSound(revealSound);
 
       const mensagemFinal =
         getRandomMessageByTheme(temaEscolhido);
@@ -94,9 +142,19 @@ function startCardDraw() {
 
 drawCardBtn.addEventListener("click", function() {
   if (!drawTheme.value) {
-    alert("Escolha um tema antes de tirar a carta.");
+    showFeedback(
+      drawError,
+      "Escolha um tema antes de revelar sua carta."
+    );
+
+    drawTheme.setAttribute("aria-invalid", "true");
+    drawTheme.focus();
+
     return;
   }
+
+  clearFeedback(drawError);
+  drawTheme.removeAttribute("aria-invalid");
 
   if (freeDrawsUsed >= maxFreeDraws) {
   if (!leadSubmitted) {
@@ -161,6 +219,8 @@ function updateDrawCounter() {
 
 form.addEventListener("submit", async function(event) {
   event.preventDefault();
+  clearFeedback(formError);
+  contactPermissionField.removeAttribute("aria-invalid");
 
   formSubmitButton.disabled = true;
   formSubmitButton.textContent = "Enviando...";
@@ -170,9 +230,19 @@ form.addEventListener("submit", async function(event) {
   const email = document.getElementById("email").value.trim();
   const contactTime = document.getElementById("contactTime").value;
   const contactPermission = document.getElementById("contactPermission").checked;
-
+  
   if (!contactPermission) {
-    alert("Você precisa aceitar o contato para continuar.");
+    showFeedback(
+      formError,
+      "Marque a autorização de contato para continuar."
+    );
+
+    contactPermissionField.setAttribute(
+      "aria-invalid",
+      "true"
+    );
+
+    contactPermissionField.focus();
 
     formSubmitButton.disabled = false;
     formSubmitButton.textContent =
@@ -185,14 +255,11 @@ form.addEventListener("submit", async function(event) {
     nome: name,
     whatsapp: whatsapp,
     email: email,    
-    melhorHorario: contactTime,
-    aceitaContato: contactPermission,    
-    dataCadastro: new Date().toLocaleString("pt-BR")
+    melhorHorario: contactTime
   };
 
   try {
     await sendLeadToGoogleForms(lead);
-    saveLeadLocalStorage(lead);
 
     leadSubmitted = true;
     maxFreeDraws = UNLOCKED_DRAWS_LIMIT;
@@ -200,6 +267,7 @@ form.addEventListener("submit", async function(event) {
     updateDrawCounter();
 
     form.reset();
+    form.classList.add("submitted");
     formSuccess.classList.add("show");
 
     setTimeout(function () {
@@ -207,11 +275,13 @@ form.addEventListener("submit", async function(event) {
           behavior: "smooth",
           block: "center"
         });
+      formSuccess.focus();
       }, 150);
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
 
-      alert(
+      showFeedback(
+        formError,
         "Não foi possível enviar seus dados. Verifique sua conexão e tente novamente."
       );
 
@@ -220,16 +290,6 @@ form.addEventListener("submit", async function(event) {
         "Enviar e liberar novas mensagens";
     }
 });
-
-
-function saveLeadLocalStorage(lead) {
-  const leadsSalvos =
-    JSON.parse(localStorage.getItem("leadsOraculo")) || []; 
-
-  leadsSalvos.push(lead); 
-
-  localStorage.setItem("leadsOraculo", JSON.stringify(leadsSalvos));
-}
 
 function sendLeadToGoogleForms(lead) {
   const formData = new FormData();

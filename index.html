@@ -60,13 +60,15 @@
 
       <div class="hero-oracle">
         <p class="draw-theme-label">Primeiro, escolha o tema da sua mensagem</p>
-        <select id="drawTheme" class="draw-theme-select">
+        <select id="drawTheme" class="draw-theme-select" aria-describedby="drawError">
           <option value="">Escolha um tema</option>
           <option value="Amor">Amor</option>
           <option value="Carreira">Carreira</option>
           <option value="Espiritualidade">Espiritualidade</option>
           <option value="Decisões Importantes">Decisões Importantes</option>
         </select>
+        
+        <p id="drawError" class="feedback-message" role="alert" aria-live="assertive"></p>
 
         <div id="cardShuffle" class="card-shuffle">
             <button class="shuffle-card card-1" type="button"></button>
@@ -89,7 +91,10 @@
       </div>
 
       <div class="hero-ambient-image">
-        <img src="imagens/mesa-tarot.png" alt="Mesa de leitura com cartas e vela">
+        <img src="imagens/mesa-tarot.png" 
+          alt="Mesa de leitura com cartas e vela"
+          decoding="async"
+        >
       </div>
     </div>    
   </section>
@@ -127,6 +132,8 @@
             <img
               src="imagens/youtube-canal.png"
               alt="Página do canal Tarot Kármico no YouTube"
+              loading="lazy"
+              decoding="async"
             >
           </div>
 
@@ -134,6 +141,8 @@
             <img
               src="imagens/youtube-comentarios.jpg"
               alt="Comentários da comunidade no YouTube"
+              loading="lazy"
+              decoding="async"
             >
           </div>
 
@@ -141,6 +150,8 @@
             <img
               src="imagens/consulta-online.jpg"
               alt="Exemplo de consulta online de Tarot"
+              loading="lazy"
+              decoding="async"
             >
           </div>
 
@@ -148,6 +159,8 @@
             <img
               src="imagens/whatsapp.jpg"
               alt="Exemplo de atendimento pelo WhatsApp"
+              loading="lazy"
+              decoding="async"
             >
           </div>
 
@@ -155,9 +168,11 @@
 
         <img
           class="phone-frame-image"
-          src="imagens/smartphone.png"
+          src="imagens/smartphone.webp"
           alt=""
           aria-hidden="true"
+          loading="lazy"
+          decoding="async"
         >
 
       </div>
@@ -254,44 +269,75 @@
       </p>
   
       <form id="oracleForm">
+        <label for="name">Seu nome</label>
+
         <input
           type="text"
           id="name"
-          placeholder="Seu nome"
+          name="name"
+          placeholder="Digite seu nome"
+          autocomplete="name"
           required
         >
-  
+        <label for="whatsapp">Seu WhatsApp</label>
+
         <input
           type="tel"
           id="whatsapp"
-          placeholder="Seu WhatsApp"
+          name="whatsapp"
+          placeholder="(00) 00000-0000"
+          autocomplete="tel"
+          inputmode="tel"
           required
         >
-  
+      
+        <label for="email">Seu e-mail <span class="optional-field">(opcional)</span></label>
+
         <input
           type="email"
           id="email"
-          placeholder="Seu e-mail"
+          name="email"
+          placeholder="nome@exemplo.com"
+          autocomplete="email"
         >
-  
-        <select id="contactTime" required>
-          <option value="">Melhor horário para contato</option>
+        
+        <label for="contactTime">Melhor horário para contato</label>
+
+        <select
+          id="contactTime"
+          name="contactTime"
+          required
+        >
+          <option value="">Selecione um horário</option>
           <option value="Manhã">Manhã</option>
           <option value="Tarde">Tarde</option>
           <option value="Noite">Noite</option>
         </select>
   
         <label class="checkbox-field">
-          <input type="checkbox" id="contactPermission" required>
+          <input type="checkbox" id="contactPermission" aria-describedby="formError">
           Aceito receber contato sobre a consulta online.
         </label>
-  
+
+        <p
+          id="formError"
+          class="feedback-message"
+          role="alert"
+          aria-live="assertive"
+        ></p>
+        
         <button type="submit">
           Enviar e liberar novas mensagens
         </button>
       </form>
   
-      <div id="formSuccess" class="form-success">
+      <div
+        id="formSuccess"
+        class="form-success"
+        role="status"
+        aria-live="polite"
+        tabindex="-1"
+      >
         <div class="success-symbol">✦</div>
       
         <h3>Dados enviados com sucesso</h3>
@@ -300,11 +346,12 @@
           Suas novas mensagens foram liberadas. Em breve, o contato poderá ser feito
           pelo WhatsApp para combinar uma leitura completa.
         </p>
-        <a 
-          class="whatsapp-btn" 
-          href="https://wa.me/5551993044478">      
-          Consulta pelo WhatsApp
-        </a>      
+        <a
+          class="whatsapp-btn"
+          href="https://wa.me/5551993044478?text=Ol%C3%A1%2C%20recebi%20minhas%20mensagens%20no%20Or%C3%A1culo%20Di%C3%A1rio%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20consulta."
+          target="_blank"
+          rel="noopener noreferrer"
+        >      
         <a class="continue-link" href="#hero">
           Voltar para as cartas
         </a>
