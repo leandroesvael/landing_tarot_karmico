@@ -9,7 +9,7 @@ const cardShuffle = document.getElementById("cardShuffle");
 const shuffleCards = document.querySelectorAll(".shuffle-card");
 
 const shuffleSound = new Audio("audio/embaralhar.wav");
-const revealSound = new Audio("audio/revelacao.wav");
+const revealSound = new Audio("audio/revelacao.mp3");
 
 shuffleSound.volume = 0.25;
 revealSound.volume = 0.35;
